@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+    postgres:
+        image: postgres:11-alpine
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: password
+
     php:
         build:
             context: .
