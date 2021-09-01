@@ -24,21 +24,21 @@ FROM composer AS production
 
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
-# ENV TIDEWAYS_VERSION 5.0.4
-# RUN set -x \
-#     && mkdir -p /usr/src/php/ext/tideways_xhprof \
-#     && curl "https://codeload.github.com/tideways/php-xhprof-extension/tar.gz/v${TIDEWAYS_VERSION}" \
-#         | tar xvz --directory=/usr/src/php/ext/tideways_xhprof --strip=1 \
-#     && docker-php-ext-install -j$(nproc) tideways_xhprof \
-#     && rm -rf /usr/src/php/ext/tideways_xhprof
-
-ENV XHPROF_VERSION 2.3.4
+ENV TIDEWAYS_VERSION 5.0.4
 RUN set -x \
-    && mkdir -p /usr/src/php/ext/xhprof \
-    && curl "https://pecl.php.net/get/xhprof/${XHPROF_VERSION}" \
-        | tar xvz --directory=/usr/src/php/ext/xhprof --strip=2 xhprof-${XHPROF_VERSION}/extension \
-    && docker-php-ext-install -j$(nproc) xhprof \
-    && rm -rf /usr/src/php/ext/xhprof
+    && mkdir -p /usr/src/php/ext/tideways_xhprof \
+    && curl "https://codeload.github.com/tideways/php-xhprof-extension/tar.gz/v${TIDEWAYS_VERSION}" \
+        | tar xvz --directory=/usr/src/php/ext/tideways_xhprof --strip=1 \
+    && docker-php-ext-install -j$(nproc) tideways_xhprof \
+    && rm -rf /usr/src/php/ext/tideways_xhprof
+
+# ENV XHPROF_VERSION 2.3.4
+# RUN set -x \
+#     && mkdir -p /usr/src/php/ext/xhprof \
+#     && curl "https://pecl.php.net/get/xhprof/${XHPROF_VERSION}" \
+#         | tar xvz --directory=/usr/src/php/ext/xhprof --strip=2 xhprof-${XHPROF_VERSION}/extension \
+#     && docker-php-ext-install -j$(nproc) xhprof \
+#     && rm -rf /usr/src/php/ext/xhprof
 
 #####################
 ### nginx image   ###
