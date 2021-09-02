@@ -32,10 +32,10 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 #     && docker-php-ext-install -j$(nproc) tideways_xhprof \
 #     && rm -rf /usr/src/php/ext/tideways_xhprof
 
-ENV XHPROF_VERSION 2.3.4
+ENV XHPROF_VERSION master
 RUN set -x \
     && mkdir -p /usr/src/php/ext/xhprof \
-    && curl "https://pecl.php.net/get/xhprof/${XHPROF_VERSION}" \
+    && curl "https://codeload.github.com/longxinH/xhprof/tar.gz/${XHPROF_VERSION}" \
         | tar xvz --directory=/usr/src/php/ext/xhprof --strip=2 xhprof-${XHPROF_VERSION}/extension \
     && docker-php-ext-install -j$(nproc) xhprof \
     && rm -rf /usr/src/php/ext/xhprof
